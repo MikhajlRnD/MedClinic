@@ -10,6 +10,7 @@ repositories {
 }
 
 dependencies {
+    implementation group: 'org.postgresql', name: 'postgresql', version: '42.4.2'
     compileOnly 'org.projectlombok:lombok:1.18.24'
     annotationProcessor 'org.projectlombok:lombok:1.18.24'
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
