@@ -30,7 +30,6 @@ public class DoctorCardServicePostgres implements DoctorCardService {
             System.out.println(e.getMessage());
             System.out.println(Arrays.toString(e.getStackTrace()));
         }
-
     }
 
     @Override
@@ -41,7 +40,7 @@ public class DoctorCardServicePostgres implements DoctorCardService {
                     " DATE_OF_BIRTH = '"  + card.getDateOfBirth() + "'," +
                     " SPECIALIZATION = '"  + card.getSpecialization() + "'," +
                     " WORK_EXPERIENCE = '"  + card.getWorkExperience() + "'," +
-                     " DATE_OF_CREATE = '"  + card.getLastUpdatedDate() + "'" +
+                    " DATE_OF_CREATE = '"  + card.getLastUpdatedDate() + "'" +
                     " WHERE id =" + id;
             System.out.println(sql);
             statement.executeUpdate(sql);
