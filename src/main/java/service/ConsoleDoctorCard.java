@@ -8,24 +8,25 @@ import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
 public class ConsoleDoctorCard implements Console{
-    private final String HELLO = "РџСЂРёРІРµС‚СЃС‚РІСѓРµРј Р’Р°СЃ РІ СЃРµСЂРІРёСЃРµ Р±Р°Р·С‹ РґР°РЅРЅС‹С… РґРѕРєС‚РѕСЂРѕРІ!!!";
-    private final String SELECT_ACTION = "РџРѕР¶Р°Р»СѓР№СЃС‚Р° РІС‹Р±РµСЂРёС‚Рµ РґРµР№СЃС‚РІРёРµ:";
-    private final String CREATE_QUERY = "Р§С‚РѕР±С‹ РґРѕР±Р°РІРёС‚СЊ РєР°СЂС‚РѕС‡РєСѓ РЅРѕРІРѕРіРѕ РІСЂР°С‡Р° РІРІРµРґРёС‚Рµ 1";
-    private final  String UPDATE_QUERY = "Р§С‚РѕР±С‹ РѕС‚СЂРµРґР°РєС‚РёСЂРѕРІР°С‚СЊ СЃСѓС‰РµСЃС‚РІСѓСЋС‰СЋСЋ РєР°СЂС‚РѕС‡РєСѓ РІСЂР°С‡Р° РІРІРµРґРёС‚Рµ 2";
-    private final String DELETE_QUERY = "Р§С‚РѕР±С‹ СѓРґР°Р»РёС‚СЊ РєР°СЂС‚РѕС‡РєСѓ РІСЂР°С‡Р° РёР· Р±Р°Р·С‹ РґР°РЅРЅС‹С… РІРІРµРґРёС‚Рµ 3";
-    private final  String GET_BY_ID_QUERY = "Р§С‚РѕР±С‹ РїРѕСЃРјРѕС‚СЂРµС‚СЊ РєР°СЂС‚РѕС‡РєСѓ СЃСѓС‰РµСЃС‚РІСѓСЋС‰РµРіРѕ РІСЂР°С‡Р° РІРІРµРґРёС‚Рµ 4";
-    private  final  String GET_ALL_QUERY = "Р§С‚РѕР±С‹ РїРѕСЃРјРѕС‚СЂРµС‚СЊ РєР°СЂС‚РѕС‡РєРё РІСЃРµС… РІСЂС‡Р°Р№ РІРІРµРґРёС‚Рµ 5";
-    private final String EXIT = "Р§С‚РѕР±С‹ РІС‹Р№С‚Рё РёР· РїСЂРёР»РѕР¶РµРЅРёСЏ РІРІРµРґРёС‚Рµ 6";
-    private  final String ID = "Р’РІРµРґРёС‚Рµ РЅРѕРјРµСЂ РєР°СЂС‚РѕС‡РєРё РґРѕРєС‚РѕСЂР°";
-    private  final String NAME = "Р’РІРµРґРёС‚Рµ Р¤РРћ Р”РѕРєС‚РѕСЂР°";
-    private  final String DATE_OF_BIRTH = "Р’РІРµРґРёС‚Рµ РґР°С‚Сѓ СЂРѕР¶РґРµРЅРёСЏ РґРѕРєС‚РѕСЂР°";
-    private  final String SPECIALIZATION = "Р’РІРµРґРёС‚Рµ СЃРїРµС†РёР°Р»СЊРЅРѕСЃС‚СЊ РґРѕРєС‚РѕСЂР°";
-    private  final String WORK_EXPERIENCE = "Р’РІРµРґРёС‚Рµ РѕРїС‹С‚ СЂР°Р±РѕС‚С‹ РґРѕРєС‚РѕСЂР°";
+    private final String HELLO = "Приветствуем Вас в сервисе базы данных докторов!!!";
+    private final String SELECT_ACTION = "Пожалуйста выберите действие:";
+    private final String CREATE_QUERY = "Чтобы добавить карточку нового врача введите 1";
+    private final  String UPDATE_QUERY = "Чтобы отредактировать существующюю карточку врача введите 2";
+    private final String DELETE_QUERY = "Чтобы удалить карточку врача из базы данных введите 3";
+    private final  String GET_BY_ID_QUERY = "Чтобы посмотреть карточку существующего врача введите 4";
+    private  final  String GET_ALL_QUERY = "Чтобы посмотреть карточки всех врчай введите 5";
+    private final String EXIT = "Чтобы выйти из приложения введите 6";
+    private  final String ID = "Введите номер карточки доктора";
+    private  final String NAME = "Введите ФИО Доктора";
+    private  final String DATE_OF_BIRTH = "Введите дату рождения доктора";
+    private  final String SPECIALIZATION = "Введите специальность доктора";
+    private  final String WORK_EXPERIENCE = "Введите опыт работы доктора";
 
     @Override
     public void console() {
         Scanner scanner = new Scanner(System.in);
         DoctorCardService doctorCardService = new DoctorCardServicePostgres();
+        DoctorCard doctorCard = new DoctorCard();
 
         while (true){
 
@@ -35,7 +36,6 @@ public class ConsoleDoctorCard implements Console{
 
             Integer choice = scanner.nextInt();
             if (choice.intValue() == 1) {
-                DoctorCard doctorCard = new DoctorCard();
                 System.out.println(ID);
                 doctorCard.setId(scanner.nextLong());
                 System.out.println(NAME);
@@ -48,11 +48,34 @@ public class ConsoleDoctorCard implements Console{
                 System.out.println(WORK_EXPERIENCE);;
                 doctorCard.setWorkExperience(scanner.nextInt());
                 doctorCard.setLastUpdatedDate(LocalDateTime.now());
-
-
-
-
-
+                doctorCardService.create(doctorCard);
+            } else if (choice.intValue() == 2) {
+                System.out.println(ID + " которую хотите изменить");
+                doctorCard.setId(scanner.nextLong());
+                System.out.println(NAME);
+                doctorCard.setName(scanner.nextLine());
+                System.out.println(DATE_OF_BIRTH);
+                DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd.MM.yyyy");
+                doctorCard.setDateOfBirth(LocalDate.parse(scanner.nextLine(), dtf));
+                System.out.println(SPECIALIZATION);
+                doctorCard.setSpecialization(scanner.nextLine());
+                System.out.println(WORK_EXPERIENCE);;
+                doctorCard.setWorkExperience(scanner.nextInt());
+                doctorCard.setLastUpdatedDate(LocalDateTime.now());
+                doctorCardService.create(doctorCard);
+                doctorCardService.update(doctorCard.getId(), doctorCard);
+            } else if (choice.intValue() == 3) {
+                System.out.println(ID + " которую хотите удалить");
+                doctorCard.setId(scanner.nextLong());
+                doctorCardService.delete(doctorCard.getId());
+            } else if (choice.intValue() == 4) {
+                System.out.println(ID + " которую хотите посмотреть");
+                doctorCard.setId(scanner.nextLong());
+                System.out.println(doctorCardService.getById(doctorCard.getId()));
+            } else if (choice.intValue() == 5) {
+                System.out.println(doctorCardService.getAll());
+            } else if (choice.intValue() == 6) {
+                break;
             }
         }
 
