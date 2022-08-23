@@ -21,18 +21,21 @@ public class Main {
         DoctorCardService doctorCard = new DoctorCardServicePostgres();
 
         DoctorCard doctorCardOne = new DoctorCard();
-        doctorCardOne.setId(1L);
-        doctorCardOne.setName("Сидоров сидор сидовроич");
-        doctorCardOne.setDateOfBirth(LocalDate.of(1992, 10, 10));
+        doctorCardOne.setId(2L);
+        doctorCardOne.setName("Сидоров сидо стдорова");
+        doctorCardOne.setDateOfBirth(LocalDate.of(1991, 11, 12));
 
-        doctorCardOne.setSpecialization("терапевт");
-        doctorCardOne.setWorkExperience(8);
+        doctorCardOne.setSpecialization("хирург");
+        doctorCardOne.setWorkExperience(2);
         doctorCardOne.setLastUpdatedDate(LocalDateTime.now());
-        System.out.println(doctorCardOne.getDateOfBirth());
-        System.out.println(doctorCardOne.getLastUpdatedDate());
+        doctorCard.create(doctorCardOne);
 
-        //doctorCard.create(doctorCardOne);
-        doctorCard.update(1L, doctorCardOne);
+        //System.out.println(doctorCard.getAll());
+
+        System.out.println(doctorCard.getById(2L));
+
+
+        //doctorCard.update(1L, doctorCardOne);
 
         //doctorCard.delete(1L);
 

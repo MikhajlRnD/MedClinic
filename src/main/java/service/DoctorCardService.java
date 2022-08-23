@@ -11,5 +11,5 @@ public interface DoctorCardService {
     void update (Long id, DoctorCard card);
     void delete (Long id);
     Card getById (Long id);
-    List<Card> getAll (List<DoctorCard> cards);
+    List<DoctorCard> getAll ();
 }
