@@ -44,7 +44,7 @@ public class ConsoleDoctorCard implements Console{
                 DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd.MM.yyyy");
                 doctorCard.setDateOfBirth(LocalDate.parse(scanner.nextLine(), dtf));
                 System.out.println(SPECIALIZATION);
-                doctorCard.setSpecialization(scanner.nextLine())
+                doctorCard.setSpecialization(scanner.nextLine());
                 System.out.println(WORK_EXPERIENCE);;
                 doctorCard.setWorkExperience(scanner.nextInt());
                 doctorCard.setLastUpdatedDate(LocalDateTime.now());
