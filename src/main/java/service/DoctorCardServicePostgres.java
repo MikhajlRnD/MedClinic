@@ -20,7 +20,7 @@ public class DoctorCardServicePostgres implements DoctorCardService {
     private final  String UPDATE_QUERY = "UPDATE doctor_card SET " +
             "NAME = ?, DATE_OF_BIRTH = ?, " +
             "SPECIALIZATION = ?, WORK_EXPERIENCE = ?, " +
-            "DATE_OF_CREATE =?";
+            "DATE_OF_CREATE =? WHERE ID = ?";
     private final String DELETE_QUERY = "DELETE FROM doctor_card " +
             "WHERE ID = ?";
 
@@ -54,6 +54,7 @@ public class DoctorCardServicePostgres implements DoctorCardService {
             statement.setString(3, card.getSpecialization());
             statement.setInt(4, card.getWorkExperience());
             statement.setTimestamp(5, Timestamp.valueOf(card.getLastUpdatedDate()));
+            statement.setLong(6, id);
             statement.execute();
         } catch (SQLException e) {
             System.out.println(e.getMessage());
@@ -84,7 +85,8 @@ public class DoctorCardServicePostgres implements DoctorCardService {
                 doctorCard.setId(resultSet.getLong("ID"));
                 doctorCard.setName(resultSet.getString("NAME"));
                 doctorCard.setDateOfBirth(resultSet.getDate("DATE_OF_BIRTH").toLocalDate());
-                doctorCard.setSpecialization(resultSet.getString("WORK_EXPERIENCE"));
+                doctorCard.setSpecialization(resultSet.getString("SPECIALIZATION"));
+                doctorCard.setWorkExperience(resultSet.getInt("WORK_EXPERIENCE"));
                 doctorCard.setLastUpdatedDate(resultSet.getTimestamp("DATE_OF_CREATE").toLocalDateTime());
             }
         } catch (SQLException e) {
@@ -105,7 +107,8 @@ public class DoctorCardServicePostgres implements DoctorCardService {
                 doctorCard.setId(resultSet.getLong("ID"));
                 doctorCard.setName(resultSet.getString("NAME"));
                 doctorCard.setDateOfBirth(resultSet.getDate("DATE_OF_BIRTH").toLocalDate());
-                doctorCard.setSpecialization(resultSet.getString("WORK_EXPERIENCE"));
+                doctorCard.setSpecialization(resultSet.getString("SPECIALIZATION"));
+                doctorCard.setWorkExperience(resultSet.getInt("WORK_EXPERIENCE"));
                 doctorCard.setLastUpdatedDate(resultSet.getTimestamp("DATE_OF_CREATE").toLocalDateTime());
                 cardList.add(doctorCard);
             }

@@ -41,10 +41,10 @@ public class ConsoleDoctorCard implements Console{
                 System.out.println(NAME);
                 doctorCard.setName(scanner.nextLine());
                 System.out.println(DATE_OF_BIRTH);
-                DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd.MM.yyyy");
-                doctorCard.setDateOfBirth(LocalDate.parse(scanner.nextLine(), dtf));
+                String date = scanner.next();
+                doctorCard.setDateOfBirth(LocalDate.parse(date,DateTimeFormatter.ofPattern("dd.MM.yyyy")));
                 System.out.println(SPECIALIZATION);
-                doctorCard.setSpecialization(scanner.nextLine());
+                doctorCard.setSpecialization(scanner.next());
                 System.out.println(WORK_EXPERIENCE);;
                 doctorCard.setWorkExperience(scanner.nextInt());
                 doctorCard.setLastUpdatedDate(LocalDateTime.now());
@@ -53,16 +53,15 @@ public class ConsoleDoctorCard implements Console{
                 System.out.println(ID + " которую хотите изменить");
                 doctorCard.setId(scanner.nextLong());
                 System.out.println(NAME);
-                doctorCard.setName(scanner.nextLine());
+                doctorCard.setName(scanner.next());
                 System.out.println(DATE_OF_BIRTH);
-                DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd.MM.yyyy");
-                doctorCard.setDateOfBirth(LocalDate.parse(scanner.nextLine(), dtf));
+                String date = scanner.next();
+                doctorCard.setDateOfBirth(LocalDate.parse(date,DateTimeFormatter.ofPattern("dd.MM.yyyy")));
                 System.out.println(SPECIALIZATION);
-                doctorCard.setSpecialization(scanner.nextLine());
+                doctorCard.setSpecialization(scanner.next());
                 System.out.println(WORK_EXPERIENCE);;
                 doctorCard.setWorkExperience(scanner.nextInt());
                 doctorCard.setLastUpdatedDate(LocalDateTime.now());
-                doctorCardService.create(doctorCard);
                 doctorCardService.update(doctorCard.getId(), doctorCard);
             } else if (choice.intValue() == 3) {
                 System.out.println(ID + " которую хотите удалить");
