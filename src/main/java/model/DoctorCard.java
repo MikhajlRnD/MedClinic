@@ -2,7 +2,6 @@ package model;
 
 import lombok.*;
 import lombok.experimental.SuperBuilder;
-import model.Card;
 
 import java.time.LocalDate;
 
@@ -19,9 +18,6 @@ public class DoctorCard extends Card {
     private LocalDate dateOfBirth;
     private String specialization;
     private Integer workExperience;
-
-
-
 
 
 }

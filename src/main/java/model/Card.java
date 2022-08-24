@@ -11,6 +11,6 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 @SuperBuilder
-public  abstract class Card {
+public abstract class Card {
     private LocalDateTime LastUpdatedDate;
 }

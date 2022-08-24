@@ -1,13 +1,10 @@
 package service;
 
-import model.Card;
-import model.DoctorCard;
+import model.LogOperation;
 
-import java.time.LocalDateTime;
+public interface LogService<T> {
 
-public interface LogService {
-
-    void creedLog (String operation, Card card, LocalDateTime time);
+    void log(LogOperation operation, T card);
 
 
 }

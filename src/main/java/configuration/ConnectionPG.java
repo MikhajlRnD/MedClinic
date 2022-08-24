@@ -11,8 +11,8 @@ public class ConnectionPG {
 
     public static Connection connect() {
         String url = "jdbc:postgresql://localhost/postgres";
-         String user = "postgres";
-         String password = "admin";
+        String user = "postgres";
+        String password = "admin";
         Connection conn = null;
         try {
             conn = DriverManager.getConnection(url, user, password);

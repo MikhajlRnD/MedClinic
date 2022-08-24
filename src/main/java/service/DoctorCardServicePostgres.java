@@ -1,15 +1,10 @@
 package service;
 
 import configuration.ConnectionPG;
-import configuration.TableCreate;
 import model.Card;
 import model.DoctorCard;
-import service.DoctorCardService;
 
 import java.sql.*;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -18,15 +13,15 @@ public class DoctorCardServicePostgres implements DoctorCardService {
     private final String CREATE_QUERY = "INSERT INTO doctor_card " +
             "(ID, NAME, DATE_OF_BIRTH, SPECIALIZATION, WORK_EXPERIENCE, DATE_OF_CREATE)"
             + " VALUES (?, ?, ?, ?, ?, ?)";
-    private final  String UPDATE_QUERY = "UPDATE doctor_card SET " +
+    private final String UPDATE_QUERY = "UPDATE doctor_card SET " +
             "NAME = ?, DATE_OF_BIRTH = ?, " +
             "SPECIALIZATION = ?, WORK_EXPERIENCE = ?, " +
             "DATE_OF_CREATE =? WHERE ID = ?";
     private final String DELETE_QUERY = "DELETE FROM doctor_card " +
             "WHERE ID = ?";
 
-    private final  String GET_BY_ID_QUERY = "SELECT * FROM doctor_card WHERE ID = ?";
-    private  final  String GET_ALL_QUERY = "SELECT * FROM doctor_card";
+    private final String GET_BY_ID_QUERY = "SELECT * FROM doctor_card WHERE ID = ?";
+    private final String GET_ALL_QUERY = "SELECT * FROM doctor_card";
 
 
     @Override
@@ -69,7 +64,7 @@ public class DoctorCardServicePostgres implements DoctorCardService {
         try (Connection connect = ConnectionPG.connect();
              PreparedStatement statement = connect.prepareStatement(DELETE_QUERY)) {
             statement.setLong(1, id);
-           statement.execute();
+            statement.execute();
         } catch (SQLException e) {
             System.out.println(e.getMessage());
             System.out.println(Arrays.toString(e.getStackTrace()));
