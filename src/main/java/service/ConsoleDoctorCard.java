@@ -27,6 +27,7 @@ public class ConsoleDoctorCard implements Console{
         Scanner scanner = new Scanner(System.in);
         DoctorCardService doctorCardService = new DoctorCardServicePostgres();
         DoctorCard doctorCard = new DoctorCard();
+        LogService log = new Log();
 
         while (true){
 
@@ -39,7 +40,7 @@ public class ConsoleDoctorCard implements Console{
                 System.out.println(ID);
                 doctorCard.setId(scanner.nextLong());
                 System.out.println(NAME);
-                doctorCard.setName(scanner.nextLine());
+                doctorCard.setName(scanner.next());
                 System.out.println(DATE_OF_BIRTH);
                 String date = scanner.next();
                 doctorCard.setDateOfBirth(LocalDate.parse(date,DateTimeFormatter.ofPattern("dd.MM.yyyy")));
@@ -49,6 +50,7 @@ public class ConsoleDoctorCard implements Console{
                 doctorCard.setWorkExperience(scanner.nextInt());
                 doctorCard.setLastUpdatedDate(LocalDateTime.now());
                 doctorCardService.create(doctorCard);
+                log.creedLog("—оздана нова€ карточка", doctorCard, LocalDateTime.now());
             } else if (choice.intValue() == 2) {
                 System.out.println(ID + " которую хотите изменить");
                 doctorCard.setId(scanner.nextLong());
@@ -63,10 +65,13 @@ public class ConsoleDoctorCard implements Console{
                 doctorCard.setWorkExperience(scanner.nextInt());
                 doctorCard.setLastUpdatedDate(LocalDateTime.now());
                 doctorCardService.update(doctorCard.getId(), doctorCard);
+                log.creedLog("ќбновлена карточка", doctorCard, LocalDateTime.now());
             } else if (choice.intValue() == 3) {
                 System.out.println(ID + " которую хотите удалить");
                 doctorCard.setId(scanner.nextLong());
+                doctorCard = (DoctorCard) doctorCardService.getById(doctorCard.getId());
                 doctorCardService.delete(doctorCard.getId());
+                log.creedLog("”далена карточка", doctorCard, LocalDateTime.now());
             } else if (choice.intValue() == 4) {
                 System.out.println(ID + " которую хотите посмотреть");
                 doctorCard.setId(scanner.nextLong());

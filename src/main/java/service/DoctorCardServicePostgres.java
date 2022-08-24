@@ -8,6 +8,7 @@ import service.DoctorCardService;
 
 import java.sql.*;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -56,6 +57,7 @@ public class DoctorCardServicePostgres implements DoctorCardService {
             statement.setTimestamp(5, Timestamp.valueOf(card.getLastUpdatedDate()));
             statement.setLong(6, id);
             statement.execute();
+
         } catch (SQLException e) {
             System.out.println(e.getMessage());
             System.out.println(Arrays.toString(e.getStackTrace()));
@@ -72,6 +74,7 @@ public class DoctorCardServicePostgres implements DoctorCardService {
             System.out.println(e.getMessage());
             System.out.println(Arrays.toString(e.getStackTrace()));
         }
+
     }
 
     @Override
