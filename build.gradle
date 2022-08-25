@@ -1,5 +1,6 @@
 plugins {
     id 'java'
+    id 'war'
 }
 
 apply plugin: 'java'
@@ -23,6 +24,7 @@ repositories {
 }
 
 dependencies {
+    compileOnly group: 'javax.servlet', name: 'javax.servlet-api', version: '4.0.1'
     implementation group: 'org.postgresql', name: 'postgresql', version: '42.4.2'
     compileOnly 'org.projectlombok:lombok:1.18.24'
     annotationProcessor 'org.projectlombok:lombok:1.18.24'
