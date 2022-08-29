@@ -36,8 +36,7 @@ public class ServletDoctorCard extends HttpServlet {
                 .collect(Collectors.joining()), DoctorCardDTO.class);
         DoctorCard doctorCard = new DoctorCard();
         doctorCard.setName(doctorCardDTO.getName());
-        doctorCard.setDateOfBirth(LocalDate.parse(doctorCardDTO.getDateOfBirth(),
-                DateTimeFormatter.ofPattern("dd.MM.yyyy")));
+        doctorCard.setDateOfBirth(LocalDate.parse(doctorCardDTO.getDateOfBirth(), DateTimeFormatter.ofPattern("dd.MM.yyyy")));
         doctorCard.setSpecialization(doctorCardDTO.getSpecialization());
         doctorCard.setWorkExperience(doctorCardDTO.getWorkExperience());
         doctorCardService.create(doctorCard);

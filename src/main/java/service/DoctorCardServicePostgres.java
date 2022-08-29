@@ -5,6 +5,7 @@ import model.Card;
 import model.DoctorCard;
 
 import java.sql.*;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -29,12 +30,12 @@ public class DoctorCardServicePostgres implements DoctorCardService {
     public void create(DoctorCard card) {
         try (Connection connect = ConnectionPG.connect();
              PreparedStatement statement = connect.prepareStatement(CREATE_QUERY)) {
-            statement.setString(1, UUID.randomUUID().toString());
+            statement.setObject(1, UUID.randomUUID());
             statement.setString(2, card.getName());
             statement.setDate(3, Date.valueOf(card.getDateOfBirth()));
             statement.setString(4, card.getSpecialization());
             statement.setInt(5, card.getWorkExperience());
-            statement.setTimestamp(6, Timestamp.valueOf(card.getLastUpdatedDate()));
+            statement.setTimestamp(6, Timestamp.valueOf(LocalDateTime.now()));
             statement.execute();
         } catch (SQLException e) {
             System.out.println(e.getMessage());
