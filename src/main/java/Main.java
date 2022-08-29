@@ -1,35 +1,26 @@
 import configuration.TableCreate;
 import lombok.SneakyThrows;
-import service.Console;
-import service.ConsoleDoctorCard;
 
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
-import java.util.Scanner;
 
 public class Main {
-@SneakyThrows
+    @SneakyThrows
     public static void main(String[] args) {
-      //TableCreate.createTable();
+        //TableCreate.createTable();
         /*Console console = new ConsoleDoctorCard();
         console.console();*/
 
-
         InitialContext cxt = new InitialContext();
-        if ( cxt == null ) {
+        if (cxt == null) {
             throw new Exception("Uh oh -- no context!");
         }
 
-        DataSource ds = (DataSource) cxt.lookup( "java:/comp/env/jdbc/postgres" );
+        DataSource ds = (DataSource) cxt.lookup("java:/comp/env/jdbc/postgres");
 
-        if ( ds == null ) {
+        if (ds == null) {
             throw new Exception("Data source not found!");
         }
-
-
-
-
-
     }
 }
 

@@ -43,7 +43,7 @@ public enum EEOperation {
             "<title>Тег FORM</title>" +
             "</head>" +
             "<body>" +
-            "<form action = 'doctorCard' method='put'>" +
+            "<form action = 'updateDoctorCard' method='post'>" +
             "<fieldset>" +
             "<legend>Update doctor card</legend>" +
             "<p>" +
@@ -79,7 +79,7 @@ public enum EEOperation {
             "<title>Тег FORM</title>" +
             "</head>" +
             "<body>" +
-            "<form action = 'doctorCard' method='delete'>" +
+            "<form action = 'deleteDoctorCard' method='post'>" +
             "<fieldset>" +
             "<legend>Delete doctor card</legend>" +
             "<p>" +

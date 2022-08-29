@@ -8,7 +8,6 @@ import java.sql.SQLException;
 
 public class ConnectionPG {
 
-
     public static Connection connect() {
         String url = "jdbc:postgresql://localhost/postgres";
         String user = "postgres";

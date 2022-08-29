@@ -1,5 +1,4 @@
-package servlets;
-import model.DoctorCard;
+package incorrectServlet;
 import service.DoctorCardService;
 import service.DoctorCardServicePostgres;
 import view.EEOperation;
@@ -21,9 +20,11 @@ public class ServletAllDoctorCard extends HttpServlet {
         resp.getWriter().write(EEOperation.GET_ALL.getValue());
         DoctorCardService doctorCardService = new DoctorCardServicePostgres();
         resp.setContentType("text/html");
-        PrintWriter printWriter = resp.getWriter();
-        printWriter.write(String.valueOf(doctorCardService.getAll()));
-        printWriter.close();
+
+        ///обработьть в трй кетч
+        try (PrintWriter printWriter = resp.getWriter();){
+            printWriter.write(String.valueOf(doctorCardService.getAll()));
+        }
     }
 
 }
