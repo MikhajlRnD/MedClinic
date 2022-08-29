@@ -1,6 +1,5 @@
 package service;
 
-import model.Card;
 import model.DoctorCard;
 
 import java.util.List;
@@ -14,7 +13,7 @@ public interface DoctorCardService {
 
     void delete(UUID id);
 
-    Card getById(UUID id);
+    DoctorCard getById(UUID id);
 
     List<DoctorCard> getAll();
 }

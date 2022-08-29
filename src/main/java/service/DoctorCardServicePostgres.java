@@ -1,7 +1,6 @@
 package service;
 
 import configuration.ConnectionPG;
-import model.Card;
 import model.DoctorCard;
 
 import java.sql.*;
@@ -51,8 +50,8 @@ public class DoctorCardServicePostgres implements DoctorCardService {
             statement.setDate(2, Date.valueOf(card.getDateOfBirth()));
             statement.setString(3, card.getSpecialization());
             statement.setInt(4, card.getWorkExperience());
-            statement.setTimestamp(5, Timestamp.valueOf(card.getLastUpdatedDate()));
-            statement.setString(6, String.valueOf(id));
+            statement.setTimestamp(5, Timestamp.valueOf(LocalDateTime.now()));
+            statement.setObject(6, id);
             statement.execute();
 
         } catch (SQLException e) {
@@ -65,7 +64,7 @@ public class DoctorCardServicePostgres implements DoctorCardService {
     public void delete(UUID id) {
         try (Connection connect = ConnectionPG.connect();
              PreparedStatement statement = connect.prepareStatement(DELETE_QUERY)) {
-            statement.setString(1, String.valueOf(id));
+            statement.setObject(1, id);
             statement.execute();
         } catch (SQLException e) {
             System.out.println(e.getMessage());
@@ -75,11 +74,11 @@ public class DoctorCardServicePostgres implements DoctorCardService {
     }
 
     @Override
-    public Card getById(UUID id) {
+    public DoctorCard getById(UUID id) {
         DoctorCard doctorCard = new DoctorCard();
         try (Connection connect = ConnectionPG.connect();
              PreparedStatement statement = connect.prepareStatement(GET_BY_ID_QUERY)) {
-            statement.setString(1, String.valueOf(id));
+            statement.setObject(1, id);
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()) {
                 doctorCard.setId(UUID.fromString(resultSet.getString("ID")));
