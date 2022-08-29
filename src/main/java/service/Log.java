@@ -13,6 +13,8 @@ public class Log implements LogService<Object> {
 
     @Override
     public void log(LogOperation operation, Object card) {
+
+        // сделать универсалбный путь для логов поправить когда будет время и добавить логи в логигу сервлетов
         Path path = Paths.get("C:/Users/Алёна/Desktop/Миша джава/log.txt");
         String str = operation.getValue() + ": " + card + " " + LocalDateTime.now() + "\n";
         try (FileWriter writer = new FileWriter(String.valueOf(path), true);
