@@ -111,6 +111,7 @@ public class DoctorCardServicePostgres implements DoctorCardService {
                 doctorCard.setWorkExperience(resultSet.getInt("WORK_EXPERIENCE"));
                 doctorCard.setLastUpdatedDate(resultSet.getTimestamp("DATE_OF_CREATE").toLocalDateTime());
                 cardList.add(doctorCard);
+
             }
         } catch (SQLException e) {
             System.out.println(e.getMessage());
