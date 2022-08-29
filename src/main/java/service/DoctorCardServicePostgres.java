@@ -8,6 +8,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.UUID;
 
 public class DoctorCardServicePostgres implements DoctorCardService {
     private final String CREATE_QUERY = "INSERT INTO doctor_card " +
@@ -28,7 +29,7 @@ public class DoctorCardServicePostgres implements DoctorCardService {
     public void create(DoctorCard card) {
         try (Connection connect = ConnectionPG.connect();
              PreparedStatement statement = connect.prepareStatement(CREATE_QUERY)) {
-            statement.setLong(1, card.getId());
+            statement.setString(1, UUID.randomUUID().toString());
             statement.setString(2, card.getName());
             statement.setDate(3, Date.valueOf(card.getDateOfBirth()));
             statement.setString(4, card.getSpecialization());
@@ -42,7 +43,7 @@ public class DoctorCardServicePostgres implements DoctorCardService {
     }
 
     @Override
-    public void update(Long id, DoctorCard card) {
+    public void update(UUID id, DoctorCard card) {
         try (Connection connect = ConnectionPG.connect();
              PreparedStatement statement = connect.prepareStatement(UPDATE_QUERY)) {
             statement.setString(1, card.getName());
@@ -50,7 +51,7 @@ public class DoctorCardServicePostgres implements DoctorCardService {
             statement.setString(3, card.getSpecialization());
             statement.setInt(4, card.getWorkExperience());
             statement.setTimestamp(5, Timestamp.valueOf(card.getLastUpdatedDate()));
-            statement.setLong(6, id);
+            statement.setString(6, String.valueOf(id));
             statement.execute();
 
         } catch (SQLException e) {
@@ -60,10 +61,10 @@ public class DoctorCardServicePostgres implements DoctorCardService {
     }
 
     @Override
-    public void delete(Long id) {
+    public void delete(UUID id) {
         try (Connection connect = ConnectionPG.connect();
              PreparedStatement statement = connect.prepareStatement(DELETE_QUERY)) {
-            statement.setLong(1, id);
+            statement.setString(1, String.valueOf(id));
             statement.execute();
         } catch (SQLException e) {
             System.out.println(e.getMessage());
@@ -73,14 +74,14 @@ public class DoctorCardServicePostgres implements DoctorCardService {
     }
 
     @Override
-    public Card getById(Long id) {
+    public Card getById(UUID id) {
         DoctorCard doctorCard = new DoctorCard();
         try (Connection connect = ConnectionPG.connect();
              PreparedStatement statement = connect.prepareStatement(GET_BY_ID_QUERY)) {
-            statement.setLong(1, id);
+            statement.setString(1, String.valueOf(id));
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()) {
-                doctorCard.setId(resultSet.getLong("ID"));
+                doctorCard.setId(UUID.fromString(resultSet.getString("ID")));
                 doctorCard.setName(resultSet.getString("NAME"));
                 doctorCard.setDateOfBirth(resultSet.getDate("DATE_OF_BIRTH").toLocalDate());
                 doctorCard.setSpecialization(resultSet.getString("SPECIALIZATION"));
@@ -102,7 +103,7 @@ public class DoctorCardServicePostgres implements DoctorCardService {
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()) {
                 DoctorCard doctorCard = new DoctorCard();
-                doctorCard.setId(resultSet.getLong("ID"));
+                doctorCard.setId(UUID.fromString(resultSet.getString("ID")));
                 doctorCard.setName(resultSet.getString("NAME"));
                 doctorCard.setDateOfBirth(resultSet.getDate("DATE_OF_BIRTH").toLocalDate());
                 doctorCard.setSpecialization(resultSet.getString("SPECIALIZATION"));

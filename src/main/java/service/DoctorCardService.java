@@ -4,16 +4,17 @@ import model.Card;
 import model.DoctorCard;
 
 import java.util.List;
+import java.util.UUID;
 
 public interface DoctorCardService {
 
     void create(DoctorCard card);
 
-    void update(Long id, DoctorCard card);
+    void update(UUID id, DoctorCard card);
 
-    void delete(Long id);
+    void delete(UUID id);
 
-    Card getById(Long id);
+    Card getById(UUID id);
 
     List<DoctorCard> getAll();
 }

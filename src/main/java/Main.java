@@ -7,9 +7,8 @@ import javax.sql.DataSource;
 public class Main {
     @SneakyThrows
     public static void main(String[] args) {
-        //TableCreate.createTable();
-        /*Console console = new ConsoleDoctorCard();
-        console.console();*/
+       // TableCreate.createTable();
+
 
         InitialContext cxt = new InitialContext();
         if (cxt == null) {

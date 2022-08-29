@@ -26,6 +26,7 @@ repositories {
 }
 
 dependencies {
+    implementation group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.13.3'
     compileOnly group: 'javax.servlet', name: 'javax.servlet-api', version: '4.0.1'
     implementation group: 'org.postgresql', name: 'postgresql', version: '42.4.2'
     compileOnly 'org.projectlombok:lombok:1.18.24'
